@@ -89,23 +89,3 @@ Call only the top 30% of the model's list, starting with previous buyers.
 > Instead of calling every customer, we'll call only the top 30% of the model's list. This group converts at 27%, compared with 11% when calling at random, and it reaches 72% of all customers who would say yes. We start with previous buyers, who convert at 65%. This cuts the number of calls by 70% while keeping almost three-quarters of the sales, saving call-center time and budget.
 
 The trade-off: about 28% of buyers sit outside the top 30% and would not be called. Previous buyers convert well because they likely already trust the bank (correlation, not cause), so avoid calling them too often.
-
-## 5. Lessons and bugs fixed
-
-Most mistakes came from small code details, and each one left a clear clue in the numbers.
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Whole table in one column | File read without the separator | `pd.read_csv(path, sep=';')` |
-| Age groups showed 619 and 1,666 people instead of 663 and 1,068 | Bins included the upper edge, so a 25-year-old landed in "<25" | `pd.cut(..., right=False)` |
-| `'AxesSubplot' object has no attribute 'bar_label'` and `module 'numpy' has no attribute 'float'` | Notebook ran an old Python environment | Select the `.venv` kernel, or `%pip install --upgrade` |
-| Top 10% converted at 11.4%, same as random | `sort_values` result not saved | `results.sort_values('score', ascending=False).head(...)` in one line |
-| 935 yes in the test set instead of 928 | `stratify=y` missing in the split | `train_test_split(..., stratify=y, random_state=42)` |
-
-Habits to keep:
-
-- Read `count` next to `mean`, and ask which group a number describes before presenting it.
-- Remove anything only known after the outcome (`duration`): that is data leakage.
-- A result no better than random is a red flag: check the code before blaming the model.
-
-**Next steps:** look inside the model at its coefficients (does education get a small weight?), then Stage 2, clustering.
