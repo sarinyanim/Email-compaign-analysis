@@ -14,16 +14,6 @@ This project is Stage 1 (regression) of my machine learning practice: an explora
 | `images/` | Charts used in this README |
 | `requirements.txt` | Python packages needed |
 
-**To run it:**
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
-
-Then open `01_regression.ipynb` in VS Code or Jupyter and select the `.venv` kernel.
-
 ## 1. The problem and the data
 
 A Portuguese bank phoned its customers to sell a term deposit. Only 11.3% said yes, so roughly 9 calls in 10 were wasted. The question: **who should we call?**
